@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/SimpleCounter.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.27;\n\ncontract SimpleCounter {\n    uint256 public counter;\n\n    event IncrementCounter(uint256 newCounterValue, address msgSender);\n\n    function increment() external {\n        counter++;\n        emit IncrementCounter(counter, msg.sender);\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "evmVersion": "paris",
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

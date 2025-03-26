@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Withdraw.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.27;\n\ncontract Withdraw {\n    // Event to log transfers\n    event TransferMade(\n        address indexed from,\n        address indexed to,\n        uint256 amount\n    );\n\n    // Function to send funds to a specific address\n    function sendFunds(address payable _recipient) external payable {\n        require(_recipient != address(0), \"Invalid recipient address\");\n        require(msg.value > 0, \"Must send some ether\");\n\n        // Transfer the funds\n        (bool success, ) = _recipient.call{value: msg.value}(\"\");\n        require(success, \"Transfer failed\");\n\n        // Emit the transfer event\n        emit TransferMade(msg.sender, _recipient, msg.value);\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "evmVersion": "paris",
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
